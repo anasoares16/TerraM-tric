@@ -1,1 +1,1 @@
-# TerraM-tric
+# TerraMetric
