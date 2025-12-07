@@ -1,0 +1,101 @@
+****0% a 10% — Baixa Emissão
+Recomendações:
+Manter boas práticas de reciclagem.
+Reduzir impressões desnecessárias.
+Incentivar documentos digitais.
+Equivalências:
+Um ônibus urbano rodando por 1 dia.
+Aproximadamente 5% das emissões médias de uma fazenda pequena.
+Um carro comum rodando cerca de 150 km.
+****10% a 25% — Emissão Moderada
+Recomendações:
+Implementar coleta seletiva estruturada.
+Utilizar papel reciclado.
+Trocar impressoras antigas por modelos mais eficientes.
+Incentivar assinatura digital.
+Equivalências:
+Uma frota pequena de vans da empresa circulando por 1 semana.
+Parte das emissões do setor de transporte urbano.
+Combustão de cerca de 1 tonelada de resíduos.
+****25% a 40% — Emissão Alta
+O que significa:
+O uso de papel representa um impacto relevante para a empresa.
+Recomendações:
+Reduzir consumo de papel em pelo menos 30%.
+Treinar funcionários para consumo consciente.
+Digitalizar processos (sistemas, QR codes, formulários online).
+Utilizar fornecedores com certificação ecológica (FSC).
+Equivalências:
+Emissões de um ônibus rodoviário em duas viagens longas.
+Emissões equivalentes ao uso mensal de maquinário agrícola leve.
+Queima de aproximadamente 150 kg de carvão vegetal.
+****40% a 60% — Emissão Muito Alta
+O que significa:
+A dependência de papel já causa impacto ambiental crítico.
+Recomendações:
+Eliminar documentos impressos internos e migrar para sistemas digitais.
+Criar metas de redução de CO₂.
+Plantar árvores ou participar de projetos de compensação ambiental.
+Adotar fornecedores com neutralização de carbono.
+Equivalências:
+Um ônibus escolar funcionando durante 1 mês.
+Emissões provenientes de irrigação e tratores durante uma safra.
+Consumo de aproximadamente 400 litros de gasolina.
+****60% a 80% — Emissão Extremamente Alta
+O que significa:
+A empresa está entre as que mais geram CO₂ pelo uso de papel.
+Recomendações:
+Criar um programa anual de neutralização de carbono.
+Substituir totalmente o papel comum por reciclado.
+Automatizar processos (apps, bancos de dados, digitalização completa).
+Auditar toda a cadeia de suprimentos.
+Equivalências:
+Emissões de um avião pequeno em um voo curto.
+Emissões semelhantes às do setor industrial leve.
+Produção de cerca de 500 kg de fertilizantes sintéticos.
+****80% a 100% — Emissão Crítica
+O que significa:
+A emissão está no mesmo nível de setores altamente poluentes.
+Recomendações:
+Revisão imediata dos processos de produção.
+Redução obrigatória de 40% a 60% do consumo de papel.
+Migração completa para fluxo digital.
+Participação em programas de crédito de carbono.
+Considerar terceirização ecológica da produção de papel.
+Equivalências:
+Emissões de ônibus intermunicipais durante um mês.
+Cerca de 30% das emissões agrícolas de um pequeno município.
+Uma frota de carros populares funcionando por uma semana.
+//////////////////////////////////////////////////////
+
+
+CREATE TABLE usuarios (
+ id INT AUTO_INCREMENT PRIMARY KEY,
+ nome_usuario VARCHAR(100) NOT NULL,
+ email VARCHAR(150) NOT NULL UNIQUE,
+ senha VARCHAR(200) NOT NULL,
+ criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TABLE questionarios (
+ id INT AUTO_INCREMENT PRIMARY KEY,
+ usuario_id INT NOT NULL,
+ q1_tamanho_empresa VARCHAR(100),
+ q2_praticas_ecologicas VARCHAR(150),
+ q3_setor VARCHAR(100),
+ q4_descarte VARCHAR(200),
+ q5_energia_renovavel VARCHAR(100),
+ q6_transporte_colaboradores VARCHAR(100),
+ q7_impacto_produtos VARCHAR(200),
+ q8_metas_ambientais VARCHAR(200),
+ criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+ FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+);
+CREATE TABLE calculadora_co2 (
+ id INT AUTO_INCREMENT PRIMARY KEY,
+ usuario_id INT NOT NULL,
+ peso_papel_kg DECIMAL(10,2),       -- peso informado
+ co2_emitido_kg DECIMAL(10,2),      -- resultado final
+ categoria_resultado VARCHAR(50),   -- “baixo”, “alto”, etc.
+ criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+ FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+);
