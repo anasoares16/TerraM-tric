@@ -3,192 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TerraMétric</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!--é uma biblioteca de icones-->
+    <title>TerraMétric | Consultoria Sustentável</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+
     <div class="hero">
-        <h1>Bem-vindo à TerraMétric </h1> <!--nome provisório-->
-        <p>Descubra como tornar sua empresa mais sustentável. Clique em "Começar" para um questionário personalizado ou role a página para conhecer mais sobre nós.</p>
-        <button class="btn" id="startBtn">Começar</button>
+        <h1>TerraMétric</h1>
+        <p>Transformando dados em ações sustentáveis para o futuro do seu negócio.</p>
+        <button class="btn" id="startBtn">Começar Diagnóstico</button>
     </div>
 
     <div class="section" id="about">
-        <h2>Sobre a Empresa</h2>
-        <p>Somos uma empresa dedicada à sustentabilidade, oferecendo soluções ecológicas para empresas de todos os tamanhos. Nosso compromisso é reduzir o impacto ambiental através de tecnologias inovadoras e práticas responsáveis.</p>
-    </div>
-
-    <div class="section" id="team">
-        <h2>Nosso Time</h2>
-        <div class="team">
-            <div class="card">
-                <i class="fas fa-user"></i>
-                <h3>Ana Maria</h3>
-                <p>.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-user"></i>
-                <h3>Bryan de Souza</h3>
-                <p>.</p><!--depois nesses paragrafos a gente coloca alguma descriçao baseado nas funções( de verdade) de cada um-->
-            </div>
-            <div class="card">
-                <i class="fas fa-user"></i>
-                <h3>Catarine Cabral</h3>
-                <p>.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-user"></i>
-                <h3>José Wilson</h3>
-                <p>.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-user"></i>
-                <h3>Maria Fantini</h3>
-                <p>.</p>
+        <div class="container">
+            <h2>Nossa Essência</h2>
+            <p class="about-text">A TerraMétric é líder em inteligência ambiental, ajudando empresas a navegar na transição para uma economia de baixo carbono através de métricas precisas e soluções práticas.</p>
+            <div class="mvt-grid">
+                <div class="mvt-card">
+                    <i class="fas fa-leaf"></i>
+                    <h3>Missão</h3>
+                    <p>Simplificar a sustentabilidade corporativa através da tecnologia.</p>
+                </div>
+                <div class="mvt-card">
+                    <i class="fas fa-eye"></i>
+                    <h3>Visão</h3>
+                    <p>Ser o padrão global em relatórios de impacto ambiental.</p>
+                </div>
+                <div class="mvt-card">
+                    <i class="fas fa-hands-helping"></i>
+                    <h3>Valores</h3>
+                    <p>Transparência, rigor científico e inovação constante.</p>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="section" id="partners">
-        <h2>Empresas Parceiras</h2>
-        <div class="partners">
-            <div class="card">
-                <i class="fas fa-building"></i>
-                <h3>PAINEL SOLAR</h3> <!-- empresas pra entrar em contato-->
-                <p>.</p><!--pedir pra eles alguma descriçaõ/bibliiografia e contato, vai funcionar como uma indicaçao, se a empresa precisa de paines solares nos recomentados eles-->
+    <div class="section" id="userArea" style="display: none;">
+        <div class="container user-card">
+            <h2>Bem-vindo, <span id="userNameDisplay">Sustentável</span></h2>
+            <div class="user-stats">
+                <div class="stat">
+                    <span>Status:</span>
+                    <strong id="userStatus">Novo Membro</strong>
+                </div>
+                <div class="stat">
+                    <span>Pontuação Eco:</span>
+                    <strong>--</strong>
+                </div>
             </div>
-            <div class="card">
-                <i class="fas fa-building"></i>
-                <h3>RECICLAGEM</h3>
-                <p>.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-building"></i>
-                <h3>TRANSPORTE</h3>
-                <p>.</p>
-            </div>
+            <button class="btn" id="openQuizBtn">Iniciar Questionário Principal</button>
         </div>
     </div>
 
-    <!-- Modal de Login -->
     <div class="modal" id="loginModal">
         <div class="modal-content">
-            <h2>Login</h2>
-            <input type="text" id="username" placeholder="Usuário">
-            <input type="email" id="email" placeholder="Email">
+            <h2>Acessar Plataforma</h2>
+            <input type="text" id="username" placeholder="Nome de Usuário">
             <input type="password" id="password" placeholder="Senha">
-            <button class="btn" id="loginBtn">Entrar</button> <!--precisa melhorar esse login e colocar um bd-->
+            <button class="btn" id="loginBtn">Entrar</button>
         </div>
     </div>
 
-    <!-- Questionário -->
-    <div class="modal quiz" id="quizModal">
-        <div class="modal-content">
+    <div class="modal" id="quizModal">
+        <div class="modal-content quiz-container">
             <div class="question active" id="q1">
                 <h2>Qual o tamanho da sua empresa?</h2>
                 <div class="options">
-                    <div class="option" data-next="q2">Pequena (até 50 pessoas)</div>
-                    <div class="option" data-next="q2">Média (51-999 pessoas)</div>
-                    <div class="option" data-next="q2">Grande (2000+ pessoas)</div>
+                    <button class="opt-btn" data-next="q2" data-score="1">Pequena (até 50 pessoas)</button>
+                    <button class="opt-btn" data-next="q2" data-score="2">Média (51-999 pessoas)</button>
+                    <button class="opt-btn" data-next="q2" data-score="3">Grande (2000+ pessoas)</button>
                 </div>
             </div>
             <div class="question" id="q2">
                 <h2>O que sua empresa faz para ser mais ecológica?</h2>
                 <div class="options">
-                    <div class="option" data-next="q3">Instala painéis solares</div>
-                    <div class="option" data-next="q3">Implementa reciclagem</div>
-                    <div class="option" data-next="q3">Reduz emissões de carbono</div>
-                    <div class="option" data-next="q3">Usa energia renovável</div>
+                    <button class="opt-btn" data-next="q3" data-score="4">Painéis Solares</button>
+                    <button class="opt-btn" data-next="q3" data-score="3">Reciclagem Ativa</button>
+                    <button class="opt-btn" data-next="q3" data-score="1">Ainda nada</button>
                 </div>
             </div>
             <div class="question" id="q3">
-                <h2>Em qual setor sua empresa atua?</h2>
+                <h2>Possui metas de redução de CO2?</h2>
                 <div class="options">
-                    <div class="option" data-next="q4">Indústrial</div>
-                    <div class="option" data-next="q4">Comércio</div>
-                    <div class="option" data-next="q4">Serviços</div>
-                    <div class="option" data-next="q4">Tecnologia/Startups</div>
+                    <button class="opt-btn" data-next="end" data-score="4">Sim, rigorosas</button>
+                    <button class="opt-btn" data-next="end" data-score="2">Sim, básicas</button>
+                    <button class="opt-btn" data-next="end" data-score="1">Não possui</button>
                 </div>
             </div>
-            <div class="question" id="q4">
-                <h2>Como os resíduos gerados são descartados?</h2>
-                <div class="options">
-                    <div class="option" data-next="q5">Sem separação, tudo no lixo comum</div>
-                    <div class="option" data-next="q5">Separados parcialmente</div>
-                    <div class="option" data-next="q5">Separação completa com reciclagem adequada</div>
-                    <div class="option" data-next="q5">Processo estruturado com reciclagem + reaproveitamento interno</div>
-                </div>
-            </div>
-            <div class="question" id="q5">
-                <h2>A empresa utiliza energia renovável (solar, eólica, etc.)?</h2>
-                <div class="options">
-                    <div class="option" data-next="q6">Não utiliza</div>
-                    <div class="option" data-next="q6">Utiliza parcialmente</div>
-                    <div class="option" data-next="q6">Utiliza majoritariamente</div>
-                    <div class="option" data-next="q6">Utiliza 100% de fontes renováveis</div>
-                </div>
-            </div>
-            <div class="question" id="q6">
-                <h2>Os colaboradores usam transporte público, bicicleta ou carona para ir ao trabalho?</h2>
-                <div class="options">
-                    <div class="option" data-next="q7">Raramente</div>
-                    <div class="option" data-next="q7">Às vezes</div>
-                    <div class="option" data-next="q7">Frequentemente</div>
-                    <div class="option" data-next="q7">Sempre</div>
-                </div>
-            </div>
-            <div class="question" id="q7">
-                <h2>Os produtos/serviços oferecidos possuem impacto ambiental reduzido?</h2>
-                <div class="options">
-                    <div class="option" data-next="q8">Não, não há foco em sustentabilidade</div>
-                    <div class="option" data-next="q8">Parcialmente, algumas práticas são aplicadas</div>
-                    <div class="option" data-next="q8">Sim, grande parte dos produtos/serviços é sustentavel</div>
-                    <div class="option" data-next="q8">Sim, toda a operação é sustentável</div>
-                </div>
-            </div>
-            <div class="question" id="q8">
-                <h2>Há metas definidas de redução de impacto ambiental?</h2>
-                <div class="options">
-                    <div class="option" data-next="end">Não</div>
-                    <div class="option" data-next="end">Sim, mas não são claras</div>
-                    <div class="option" data-next="end">Sim, com metas específicas</div>
-                    <div class="option" data-next="end">Sim, com metas e acompanhamento rigoroso</div>
-                </div>
-            </div>
+
             <div class="question" id="end">
-                <h2>Obrigado! Baseado nas suas respostas, recomendamos soluções personalizadas.</h2>
-                <p>Quer calcular o CO2 específico de papel usado na sua empresa?</p>
-                <button class="btn" id="calcPaperBtn">Calcular CO2 de Papel</button>
-                <button class="btn" onclick="closeQuiz()">Fechar</button>
+                <h2>Tudo Pronto!</h2>
+                <p>O seu relatório foi gerado com sucesso.</p>
+                <button class="btn" id="viewReportBtn">Ver Resultados na Tela</button>
             </div>
         </div>
     </div>
 
-    <!-- Modal da Calculadora de CO2 de Papel -->
-    <div class="modal" id="paperCalculatorModal">
-        <div class="modal-content">
-            <h2>Calculadora de CO2 de Papel</h2>
-            <form id="questionnaire">
-                <label>1. Sua empresa produz ou consome papel? (Sim/Não)</label><br>
-                <input type="radio" name="produzPapel" value="sim"> Sim<br>
-                <input type="radio" name="produzPapel" value="nao"> Não<br><br>
-                
-                <label>2. Quantas folhas de papel por mês? (Apenas números)</label><br>
-                <input type="number" id="quantidadePapel" placeholder="Ex: 10000"><br><br>
-                
-                <label>3. Tipo de papel? (Padrão/Reciclado)</label><br>
-                <input type="radio" name="tipoPapel" value="padrao"> Padrão<br>
-                <input type="radio" name="tipoPapel" value="reciclado"> Reciclado<br><br>
-                
-                <button type="button" onclick="processar()">Ver Solução e Calcular Carbono</button>
-            </form>
+    <div class="section" id="reportSection" style="display: none;">
+        <div class="container">
+            <h2>Diagnóstico de Impacto Ambiental</h2>
             
-            <div id="resultado" style="margin-top: 20px;"></div>
-            <button class="btn" onclick="closePaperCalculator()">Fechar</button>
+            <div class="report-grid">
+                <div class="chart-box">
+                    <canvas id="pollutionChart"></canvas>
+                </div>
+                <div class="table-box">
+                    <table id="resultTable">
+                        <thead>
+                            <tr>
+                                <th>Poluente</th>
+                                <th>Nível Empresa</th>
+                                <th>Média Nacional</th>
+                                <th>Solução</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="paper-option">
+                <h3>Deseja calcular o impacto específico de Papel?</h3>
+                <p>Responda se utiliza papel no seu dia a dia.</p>
+                <button class="btn btn-alt" id="openPaperModal">Sim, responder sobre papel</button>
+            </div>
         </div>
     </div>
 
+    <div class="modal" id="paperModal">
+        <div class="modal-content">
+            <h2>Calculadora de Papel</h2>
+            <div id="paperStep1">
+                <p>Sua empresa utiliza papel de forma recorrente?</p>
+                <button class="btn" onclick="showPaperCalc(true)">Sim</button>
+                <button class="btn btn-alt" onclick="showPaperCalc(false)">Não</button>
+            </div>
+            <div id="paperStep2" style="display:none;">
+                <input type="number" id="paperQty" placeholder="Folhas por mês (ex: 5000)">
+                <select id="paperType">
+                    <option value="padrao">Papel Comum</option>
+                    <option value="reciclado">Papel Reciclado</option>
+                </select>
+                <button class="btn" id="calcPaperFinal">Calcular</button>
+            </div>
+            <div id="paperResult"></div>
+            <button class="close-modal" onclick="closePaperModal()">Fechar</button>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="script.js"></script>
 </body>
 </html>

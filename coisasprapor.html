@@ -69,33 +69,8 @@ Uma frota de carros populares funcionando por uma semana.
 //////////////////////////////////////////////////////
 
 
-CREATE TABLE usuarios (
- id INT AUTO_INCREMENT PRIMARY KEY,
- nome_usuario VARCHAR(100) NOT NULL,
- email VARCHAR(150) NOT NULL UNIQUE,
- senha VARCHAR(200) NOT NULL,
- criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-CREATE TABLE questionarios (
- id INT AUTO_INCREMENT PRIMARY KEY,
- usuario_id INT NOT NULL,
- q1_tamanho_empresa VARCHAR(100),
- q2_praticas_ecologicas VARCHAR(150),
- q3_setor VARCHAR(100),
- q4_descarte VARCHAR(200),
- q5_energia_renovavel VARCHAR(100),
- q6_transporte_colaboradores VARCHAR(100),
- q7_impacto_produtos VARCHAR(200),
- q8_metas_ambientais VARCHAR(200),
- criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
- FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
-);
-CREATE TABLE calculadora_co2 (
- id INT AUTO_INCREMENT PRIMARY KEY,
- usuario_id INT NOT NULL,
- peso_papel_kg DECIMAL(10,2),       -- peso informado
- co2_emitido_kg DECIMAL(10,2),      -- resultado final
- categoria_resultado VARCHAR(50),   -- “baixo”, “alto”, etc.
- criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
- FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
-);
+Precisa conectar o site com o Supabase e melhorar o sistema de login. O login deve funcionar tanto para quem já tem conta quanto para quem vai criar uma nova.
+
+Quem já é usuário faz login normalmente, e o site puxa os dados direto do Supabase.
+
+Quem ainda não tem conta consegue se cadastrar, e o usuário novo é criado e salvo no Supabase.

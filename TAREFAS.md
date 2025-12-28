@@ -22,6 +22,8 @@
 - [ ] Implementar filtros avançados
 - [ ] Adicionar modo escuro
 - [ ] Adicionar mascote(cacatua)
+- [ ] Adicionar opção de ver a senha
+- [ ] Colocar parte Sobre no final da pagina
 
 ### Funcionalidades
 - [ ] Permitir exportar dados em PDF/CSV
@@ -37,7 +39,7 @@
 - [ ] Validar inputs do usuário
 - [ ] Adicionar mensagens de erro mais claras
 - [ ] Melhorar UX do formulário
-- [ ] Corrigir animação do pet em dispositivos móveis
+
 
 ---
 
@@ -88,6 +90,8 @@
 |--------|--------|--------|
 | Ana | Desenvolvimento básico |✅ Concluído|05/12/2025
 | Ana | Adicionar calculadora CO2 |✅ Concluído|06/12/2025
+| Ana | Adicionar graficos |✅ Concluído|27/12/2025
+| Ana | Criar banco de dados |✅ Concluído|27/12/2025
 
 ---
 
