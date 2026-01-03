@@ -14,6 +14,8 @@
 - [ ] Criar API para salvar dados de poluentes
 - [ ] Implementar autenticação de usuários
 - [ ] Criar sistema de relatórios
+- [ ] Login/cadastro com supabase //DUDA!!
+- [ ] habilitar o gráfico
 
 ### Frontend
 - [ ] Adicionar comentários ao código 
@@ -21,7 +23,7 @@
 - [ ] Adicionar mais gráficos/visualizações
 - [ ] Implementar filtros avançados
 - [ ] Adicionar modo escuro
-- [ ] Adicionar mascote(cacatua)
+- [ ] Adicionar mascote(beija-flor)
 - [ ] Adicionar opção de ver a senha
 - [ ] Colocar parte Sobre no final da pagina
 
@@ -78,9 +80,9 @@
 | Tarefa | Data Prevista | Status |
 |--------|---------------|--------|
 | Desenvolvimento básico | 05/12/2025 | ✅ Concluído |
-| Comentários no código | 05/12/2025 | 
-| Testes | 06/12/2025 | ⏳ Pendente |
-| Deploy | 10/12/2025 | ⏳ Pendente |
+|Comentários no código | ⏳ Pendente  | ⏳ Pendente
+
+
 
 ---
 
@@ -92,6 +94,7 @@
 | Ana | Adicionar calculadora CO2 |✅ Concluído|06/12/2025
 | Ana | Adicionar graficos |✅ Concluído|27/12/2025
 | Ana | Criar banco de dados |✅ Concluído|27/12/2025
+| Ana |Reescrita do código |✅ Concluído|03/01/2026
 
 ---
 
