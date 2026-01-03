@@ -1,159 +1,70 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TerraMétric | Consultoria Sustentável</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="UTF-8">
+  <title>TerraMétric</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
+
 <body>
 
-    <div class="hero">
-        <h1>TerraMétric</h1>
-        <p>Transformando dados em ações sustentáveis para o futuro do seu negócio.</p>
-        <button class="btn" id="startBtn">Começar Diagnóstico</button>
+<div class="hero">
+  <h1>TerraMétric</h1>
+  <p>Diagnóstico ambiental inteligente</p>
+  <button class="btn" id="startBtn">Começar</button>
+</div>
+
+<section id="userArea" style="display:none">
+  <h2>Bem-vindo, <span id="userNameDisplay"></span></h2>
+  <button class="btn" id="openQuizBtn">Iniciar Questionário</button>
+  <button class="btn btn-alt" id="logoutBtn">Sair</button>
+</section>
+
+<!-- LOGIN MODAL -->
+<div class="modal" id="loginModal">
+  <div class="modal-content">
+    <h3>Login</h3>
+    <input id="loginEmail" placeholder="Email">
+    <input id="loginPassword" type="password" placeholder="Senha">
+    <button class="btn" id="doLoginBtn">Entrar</button>
+
+    <hr>
+
+    <h3>Criar Conta</h3>
+    <input id="signupEmail" placeholder="Email">
+    <input id="signupPassword" type="password" placeholder="Senha">
+    <button class="btn btn-alt" id="doSignupBtn">Cadastrar</button>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div class="modal" id="quizModal">
+  <div class="modal-content">
+    <div class="question active" id="q1">
+      <h2>Tamanho da empresa</h2>
+      <button class="opt-btn" data-next="q2" data-score="10">Pequena</button>
+      <button class="opt-btn" data-next="q2" data-score="25">Média</button>
+      <button class="opt-btn" data-next="q2" data-score="50">Grande</button>
     </div>
 
-    <div class="section" id="about">
-        <div class="container">
-            <h2>Nossa Essência</h2>
-            <p class="about-text">A TerraMétric é líder em inteligência ambiental, ajudando empresas a navegar na transição para uma economia de baixo carbono através de métricas precisas e soluções práticas.</p>
-            <div class="mvt-grid">
-                <div class="mvt-card">
-                    <i class="fas fa-leaf"></i>
-                    <h3>Missão</h3>
-                    <p>Simplificar a sustentabilidade corporativa através da tecnologia.</p>
-                </div>
-                <div class="mvt-card">
-                    <i class="fas fa-eye"></i>
-                    <h3>Visão</h3>
-                    <p>Ser o padrão global em relatórios de impacto ambiental.</p>
-                </div>
-                <div class="mvt-card">
-                    <i class="fas fa-hands-helping"></i>
-                    <h3>Valores</h3>
-                    <p>Transparência, rigor científico e inovação constante.</p>
-                </div>
-            </div>
-        </div>
+    <div class="question" id="q2">
+      <h2>Práticas ecológicas</h2>
+      <button class="opt-btn" data-next="end" data-score="-10">Sim</button>
+      <button class="opt-btn" data-next="end" data-score="10">Não</button>
     </div>
 
-    <div class="section" id="userArea" style="display: none;">
-        <div class="container user-card">
-            <h2>Bem-vindo, <span id="userNameDisplay">Sustentável</span></h2>
-            <div class="user-stats">
-                <div class="stat">
-                    <span>Status:</span>
-                    <strong id="userStatus">Novo Membro</strong>
-                </div>
-                <div class="stat">
-                    <span>Pontuação Eco:</span>
-                    <strong>--</strong>
-                </div>
-            </div>
-            <button class="btn" id="openQuizBtn">Iniciar Questionário Principal</button>
-        </div>
+    <div class="question" id="end">
+      <button class="btn" id="viewReportBtn">Finalizar</button>
     </div>
+  </div>
+</div>
 
-    <div class="modal" id="loginModal">
-        <div class="modal-content">
-            <h2>Acessar Plataforma</h2>
-            <input type="text" id="username" placeholder="Nome de Usuário">
-            <input type="password" id="password" placeholder="Senha">
-            <button class="btn" id="loginBtn">Entrar</button>
-        </div>
-    </div>
+<section id="reportSection" style="display:none">
+  <canvas id="pollutionChart"></canvas>
+</section>
 
-    <div class="modal" id="quizModal">
-        <div class="modal-content quiz-container">
-            <div class="question active" id="q1">
-                <h2>Qual o tamanho da sua empresa?</h2>
-                <div class="options">
-                    <button class="opt-btn" data-next="q2" data-score="1">Pequena (até 50 pessoas)</button>
-                    <button class="opt-btn" data-next="q2" data-score="2">Média (51-999 pessoas)</button>
-                    <button class="opt-btn" data-next="q2" data-score="3">Grande (2000+ pessoas)</button>
-                </div>
-            </div>
-            <div class="question" id="q2">
-                <h2>O que sua empresa faz para ser mais ecológica?</h2>
-                <div class="options">
-                    <button class="opt-btn" data-next="q3" data-score="4">Painéis Solares</button>
-                    <button class="opt-btn" data-next="q3" data-score="3">Reciclagem Ativa</button>
-                    <button class="opt-btn" data-next="q3" data-score="1">Ainda nada</button>
-                </div>
-            </div>
-            <div class="question" id="q3">
-                <h2>Possui metas de redução de CO2?</h2>
-                <div class="options">
-                    <button class="opt-btn" data-next="end" data-score="4">Sim, rigorosas</button>
-                    <button class="opt-btn" data-next="end" data-score="2">Sim, básicas</button>
-                    <button class="opt-btn" data-next="end" data-score="1">Não possui</button>
-                </div>
-            </div>
-
-            <div class="question" id="end">
-                <h2>Tudo Pronto!</h2>
-                <p>O seu relatório foi gerado com sucesso.</p>
-                <button class="btn" id="viewReportBtn">Ver Resultados na Tela</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="section" id="reportSection" style="display: none;">
-        <div class="container">
-            <h2>Diagnóstico de Impacto Ambiental</h2>
-            
-            <div class="report-grid">
-                <div class="chart-box">
-                    <canvas id="pollutionChart"></canvas>
-                </div>
-                <div class="table-box">
-                    <table id="resultTable">
-                        <thead>
-                            <tr>
-                                <th>Poluente</th>
-                                <th>Nível Empresa</th>
-                                <th>Média Nacional</th>
-                                <th>Solução</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="paper-option">
-                <h3>Deseja calcular o impacto específico de Papel?</h3>
-                <p>Responda se utiliza papel no seu dia a dia.</p>
-                <button class="btn btn-alt" id="openPaperModal">Sim, responder sobre papel</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal" id="paperModal">
-        <div class="modal-content">
-            <h2>Calculadora de Papel</h2>
-            <div id="paperStep1">
-                <p>Sua empresa utiliza papel de forma recorrente?</p>
-                <button class="btn" onclick="showPaperCalc(true)">Sim</button>
-                <button class="btn btn-alt" onclick="showPaperCalc(false)">Não</button>
-            </div>
-            <div id="paperStep2" style="display:none;">
-                <input type="number" id="paperQty" placeholder="Folhas por mês (ex: 5000)">
-                <select id="paperType">
-                    <option value="padrao">Papel Comum</option>
-                    <option value="reciclado">Papel Reciclado</option>
-                </select>
-                <button class="btn" id="calcPaperFinal">Calcular</button>
-            </div>
-            <div id="paperResult"></div>
-            <button class="close-modal" onclick="closePaperModal()">Fechar</button>
-        </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
